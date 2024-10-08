@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--background-color, #f4f4f4);
+            color: var(--text-color, #333);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--container-bg-color, #fff);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px;
+            width: calc(100% - 22px);
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #downloadBtn {
+            display: none;
+            margin-top: 20px;
+        }
+        /* Theme Toggle Switch */
+        .theme-toggle {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        /* Light Theme Variables */
+        :root {
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --container-bg-color: #fff;
+            --table-header-bg-color: #f2f2f2;
+        }
+        /* Dark Theme Variables */
+        .dark-theme {
+            --background-color: #333;
+            --text-color: #f4f4f4;
+            --container-bg-color: #444;
+            --table-header-bg-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Account Search</h1>
+        <div class="search-form">
+            <input type="text" id="keyword" placeholder="Enter keyword">
+            <select id="limit">
+                <option value="100">100 results</option>
+                <option value="500">500 results</option>
+                <option value="1000">1000 results</option>
+                <option value="6000">6000 results (Max)</option>
+            </select>
+            <button onclick="search()">Search</button>
+        </div>
+        <div class="checkbox-group">
+            <div class="checkbox-container">
+                <input type="checkbox" id="ignoreGmail">
+                <label for="ignoreGmail">Ignore Gmail</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="keepUserPass">
+                <label for="keepUserPass">Keep Username/Password Only</label>
+            </div>
+        </div>
+        <div id="results"></div>
+        <button id="downloadBtn" onclick="downloadResults()">Download Results</button>
+        <div class="theme-toggle">
+            <span>Dark/Light</span>
+            <label class="switch">
+                <input type="checkbox" id="themeSwitch">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
